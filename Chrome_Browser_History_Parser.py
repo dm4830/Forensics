@@ -1,7 +1,6 @@
 import sqlite3
 import sys
 from datetime import datetime, timedelta
-import calendar
 
 def month_name (number):
     if number == 1:
@@ -38,30 +37,17 @@ try:
             c.execute("SELECT id FROM downloads")
             print("Total Downloads:", len(c.fetchall()))
             
-
             c.execute("PRAGMA table_info(urls)")
-            #print("url col names")
-            #print(c.fetchall()) #columns names
+            #print(c.fetchall()) #columns names of url table
 
-            c.execute("PRAGMA table_info(keyword_search_terms)")
-            #print("keyword col names")
-            #print(c.fetchall()) #columns names
-            c.execute("PRAGMA table_info(urls)")
-            #print("keyword col names")
-            #print(c.fetchall()) #columns names
-            c.execute("PRAGMA table_info(visits)")
-            #print("keyword col names")
-            #print(c.fetchall()) #columns names
-
-            c.execute("SELECT keyword_id, url_id, term FROM keyword_search_terms")
+            #c.execute("SELECT keyword_id, url_id, term FROM keyword_search_terms")
             #print("all search")
             #print(c.fetchall()) #columns names
 
-            c.execute("SELECT visit_time, url FROM visits ORDER BY visit_time DESC")
+            #c.execute("SELECT visit_time, url FROM visits ORDER BY visit_time DESC")
             #print(c.fetchall())
             #print("all search")
             #print(c.fetchall()) #columns names
-
 
             #c.execute("SELECT id, url FROM urls WHERE url LIKE '%library%'")
             #print("all search")
@@ -69,8 +55,6 @@ try:
 
             c.execute("SELECT name FROM sqlite_master WHERE type='table';")
             #print(c.fetchall()) #all tables
-
-         
 
 
             num_of_downloads = c.execute("SELECT term FROM keyword_search_terms")
@@ -86,9 +70,8 @@ try:
             file_size = c.fetchone()
             print("File Size:", file_size [1])
 
-            c.execute("SELECT name FROM sqlite_master WHERE type='table';")
+            #c.execute("SELECT name FROM sqlite_master WHERE type='table';")
             #print(c.fetchall()) #all tables
-
 
             uniuqe_searchs = c.execute("SELECT DISTINCT term FROM keyword_search_terms")
             uniuqe_searchs = uniuqe_searchs.fetchall()
@@ -117,8 +100,6 @@ try:
             print("Most Recent Search Date/Time: {}{}{}{}".format(year,x,day,secs))
 
             
-      
-
         except sqlite3.OperationalError:
             print("Error! - File Not Found!")
 
